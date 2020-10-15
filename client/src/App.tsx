@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Editor from './components/Editor'
@@ -7,7 +7,14 @@ function App() {
   return (
     <>
       <div className='window'>
-        
+        <Editor 
+          language='xml' 
+          displayName='HTML' 
+          value={} 
+          onChange={} 
+        />
+        <Editor />
+        <Editor />
       </div>
       <div className='window'>
         <iframe 
