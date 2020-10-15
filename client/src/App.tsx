@@ -1,23 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Editor from './components/Editor'
 
 function App() {
+  const [html, setHTML] = useState('')
+  const [css, setCSS] = useState('')
+  const [javascript, setJavascript] = useState('')
+  const [srcDoc, setSrcDoc] = useState('')
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSrcDoc(`
+      <html>
+        <body>${html}</body>
+        <style>${css}</style>
+        <script>${javascript}</script>
+      </html>
+    `)
+    }, 300)
+  }, [html, css, javascript])
+
   return (
     <>
-      <div className='window'>
+      <div className='window top-window'>
         <Editor 
           language='xml' 
           displayName='HTML' 
-          value={} 
-          onChange={} 
+          value={html} 
+          onChange={setHTML} 
         />
-        <Editor />
-        <Editor />
+        <Editor
+          language='css' 
+          displayName='CSS' 
+          value={css} 
+          onChange={setCSS} 
+        />
+        <Editor
+          language='javascript' 
+          displayName='Javascript' 
+          value={javascript} 
+          onChange={setJavascript} 
+        />
       </div>
       <div className='window'>
         <iframe 
+          srcDoc={srcDoc}
           title='output' 
           sandbox='allow-scripts'
           frameBorder='0'
