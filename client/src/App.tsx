@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Editor from './components/Editor'
+import { time } from 'console';
 
 function App() {
-  const [html, setHTML] = useState('')
-  const [css, setCSS] = useState('')
-  const [javascript, setJavascript] = useState('')
-  const [srcDoc, setSrcDoc] = useState('')
+  const [html, setHTML] = useState<string>(`<h1>Hello World</h1>`)
+  const [css, setCSS] = useState<string>(``)
+  const [javascript, setJavascript] = useState<string>('')
+  const [srcDoc, setSrcDoc] = useState<string>('')
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -18,12 +19,18 @@ function App() {
         <script>${javascript}</script>
       </html>
     `)
-    }, 300)
+    }, 1000)
+
+    return () => clearTimeout(timeout)
   }, [html, css, javascript])
 
   return (
     <>
-      <div className='window top-window'>
+    <div className='window-container'>
+      <div className='window code-window'>
+      <h3>Kyle</h3>
+      <h3>Portfolio Website</h3>
+      <h4>Designs for Portfolio website.</h4>
         <Editor 
           language='xml' 
           displayName='HTML' 
@@ -43,7 +50,7 @@ function App() {
           onChange={setJavascript} 
         />
       </div>
-      <div className='window'>
+      <div className='window display'>
         <iframe 
           srcDoc={srcDoc}
           title='output' 
@@ -53,6 +60,7 @@ function App() {
           height='100%'
         />
       </div>
+    </div>
     </>
   );
 }
