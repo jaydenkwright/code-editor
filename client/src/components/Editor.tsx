@@ -11,10 +11,11 @@ const Editor: React.FC<any> = ({ displayName, language, value, onChange }) => {
         onChange(value)
     }
     return (
+        <>
+        <div className='editor-title'>
+            {displayName}
+        </div>
         <div className='editor-container'>
-            <div className='editor-title'>
-                {displayName}
-            </div>
             <ControlledEditor 
                 onBeforeChange={handleChange}
                 value={value}
@@ -28,6 +29,7 @@ const Editor: React.FC<any> = ({ displayName, language, value, onChange }) => {
                 }}
             />
         </div>
+        </>
     )
 }
 
