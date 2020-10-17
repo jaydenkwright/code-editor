@@ -17,4 +17,13 @@ CREATE TABLE users(
     email VARCHAR(200) NOT NULL,
     password VARCHAR(300) NOT NULL,
     date TIMESTAMP
-)
+);
+
+CREATE TABLE projects(
+    id BIGSERIAL PRIMARY KEY,
+    userId INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description VARCHAR(200),
+    private BOOLEAN,
+    date TIMESTAMP
+);
