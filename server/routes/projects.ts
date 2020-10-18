@@ -21,7 +21,16 @@ router.get('/user/:userId', async (req: Request, res: Response) => {
 })
 
 router.get('/:id', async (req: Request, res: Response) => {
-
+    const { id } = req.params
+    const project = await pool.query(
+        "SELECT * FROM projects WHERE id = $1",
+        [id]
+    )
+    if (project.rows[0]){
+        res.json(project.rows[0])
+    }else{
+        res.json({})
+    }
 })
 
 router.put('/:id', async (req: Request, res: Response) => {
