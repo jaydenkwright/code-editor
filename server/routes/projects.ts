@@ -1,5 +1,4 @@
 import express, {Request, Response, Router} from 'express'
-import { create } from 'ts-node'
 import { pool } from '../db/db'
 const router = Router()
 
