@@ -47,7 +47,6 @@ router.post('/create', verify, async (req: any, res: Response) => {
         )
         res.json(newCode.rows[0])
     }catch(error){
-        console.log(error)
         res.json({"msg": "Something went wrong!"})
     }
 })
