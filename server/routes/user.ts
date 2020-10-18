@@ -3,6 +3,7 @@ import { pool } from '../db/db'
 import Joi from '@hapi/joi'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { verify } from './middleware/verify'
 const router = Router()
 
 const registrationSchema = Joi.object({
@@ -63,7 +64,7 @@ router.post('/login', async (req: Request, res: Response) => {
         const validatePassword = await bcrypt.compare(password, user.rows[0].password)
         if (!validatePassword) return res.status(400).json({'msg': 'Password is incorrect'})
 
-        const token = jwt.sign({token: user.rows[0].id}, `${process.env.TOKEN_SECRET}`, {
+        const token = jwt.sign({id: user.rows[0].id}, `${process.env.TOKEN_SECRET}`, {
             expiresIn: '24h'
         })
 
@@ -78,12 +79,27 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 })
 
-router.get('/me', (req: Request, res: Response) => {
-
+router.get('/me', verify, async (req: any, res: Response) => {
+    const { id } = req.user
+    try {
+        const user = await pool.query(
+            "SELECT * FROM users WHERE id = $1",
+            [id]
+        )
+        const { name, username, email, } = user.rows[0]
+        res.json({
+            id: user.rows[0].id,
+            name,
+            username,
+            email
+        })
+    } catch (error) {
+        res.json({"msg": "Something went wrong!"})
+    }
 })
 
-router.get('/isLoggedIn', (req: Request, res: Response) => {
-
+router.get('/isLoggedIn', verify, async(req: Request, res: Response) => {
+    return res.json({"msg": "Logged in!"})
 })
 
 export default router
