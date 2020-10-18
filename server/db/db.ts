@@ -1,8 +1,11 @@
 import { Pool } from 'pg'
-
-const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`
+import dotenv from 'dotenv'
+dotenv.config()
 
 export const pool = new Pool({
-    connectionString: connectionString,
-    ssl: false,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    database: process.env.DB_DATABASE,
 })
