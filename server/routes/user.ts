@@ -4,14 +4,8 @@ import Joi from '@hapi/joi'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { verify } from './middleware/verify'
+import { registrationSchema, loginSchema } from './validation/validation'
 const router = Router()
-
-const registrationSchema = Joi.object({
-    name: Joi.string().min(1).max(50).required(),
-    username: Joi.string().min(3).max(100).required(),
-    email: Joi.string().min(7).max(200).required().email(),
-    password: Joi.string().min(6).max(300).required()
-})
 
 router.post('/register', async (req: Request, res: Response) => {
     try{
@@ -42,11 +36,6 @@ router.post('/register', async (req: Request, res: Response) => {
     }catch(error){
         res.json({"msg": "Something went wrong!"})
     }
-})
-
-const loginSchema = Joi.object({
-    email: Joi.string().min(7).max(200).required().email(),
-    password: Joi.string().min(6).max(300).required()
 })
 
 router.post('/login', async (req: Request, res: Response) => {
