@@ -1,6 +1,6 @@
 import express, {Request, Response, Router} from 'express'
-import { CoreTransformationContext } from 'typescript'
 import { pool } from '../db/db'
+import { verify } from './middleware/verify'
 const router = Router()
 
 router.get('/:id', async (req: Request, res: Response) => {
@@ -37,26 +37,29 @@ router.get('/project/:projectId', async (req: Request, res: Response) => {
     }
 })
 
-router.post('/create', async (req: Request, res: Response) => {
+router.post('/create', verify, async (req: any, res: Response) => {
     try{
-        const { userId, projectId, lang, code } = req.body
+        const { user } = req
+        const { projectId, lang, code } = req.body
         const newCode = await pool.query(
             "INSERT INTO code (userId, projectId, lang, code, lastUpdated, date) VALUES($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *", 
-            [userId, projectId, lang, code]
+            [user.id, projectId, lang, code]
         )
         res.json(newCode.rows[0])
     }catch(error){
+        console.log(error)
         res.json({"msg": "Something went wrong!"})
     }
 })
 
-router.put('/update/:id', async (req: Request, res: Response) => {
+router.put('/update/:id', verify, async (req: any, res: Response) => {
     try {
+        const { user } = req
         const { id } = req.params
         const { code } = req.body
         const updateCode = pool.query(
-            "UPDATE code SET code = $1, lastUpdated = CURRENT_TIMESTAMP WHERE id = $2 RETURNING *",
-            [code, id]
+            "UPDATE code SET code = $1, lastUpdated = CURRENT_TIMESTAMP WHERE id = $2 AND userId = $3",
+            [code, id, user.id]
         )
         res.json({"msg": "Updated"})
     } catch (error) {
@@ -64,12 +67,13 @@ router.put('/update/:id', async (req: Request, res: Response) => {
     }
 })
 
-router.delete('/delete/:id', async (req: Request, res: Response) => {
+router.delete('/delete/:id', verify, async (req: any, res: Response) => {
     try {
+        const { user } = req
         const { id } = req.params
         const deleteCode = pool.query(
-            "DELETE FROM code WHERE id = $1",
-            [id]
+            "DELETE FROM code WHERE id = $1 AND userId = $2",
+            [id, user.id]
         )
         res.json({"msg": "Deleted"})
     } catch (error) {
