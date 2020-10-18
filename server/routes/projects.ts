@@ -17,19 +17,33 @@ router.post('/create', async (req: Request, res: Response) => {
 })
 
 router.get('/user/:userId', async (req: Request, res: Response) => {
-    
+    const { userId } = req.params
+    try {
+        const userProjects = await pool.query(
+            "SELECT * FROM projects WHERE userId = $1 ORDER BY id DESC",
+            [userId]
+        )
+        if (userProjects.rows){
+            res.json(userProjects.rows)
+        }else{
+            res.json({})
+        }
+    } catch (error) {
+        res.json({"msg": "Something went wrong!"})
+    }
 })
 
 router.get('/:id', async (req: Request, res: Response) => {
+    const userId = 3
     const { id } = req.params
     const project = await pool.query(
-        "SELECT * FROM projects WHERE id = $1",
-        [id]
+        "SELECT * FROM projects WHERE (id = $1 AND private = $2) OR userId = $3",
+        [id, false, userId]
     )
     if (project.rows[0]){
         res.json(project.rows[0])
     }else{
-        res.json({})
+        res.json({"msg": "Something went wrong!"})
     }
 })
 
