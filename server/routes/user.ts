@@ -1,6 +1,5 @@
 import express, { Request, Response, Router } from 'express'
 import { pool } from '../db/db'
-import Joi from '@hapi/joi'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { verify } from './middleware/verify'
@@ -34,7 +33,7 @@ router.post('/register', async (req: Request, res: Response) => {
 
         res.json({"msg": "User created"})
     }catch(error){
-        res.json({"msg": "Something went wrong!"})
+        res.status(500).json({"msg": "Something went wrong!"})
     }
 })
 
@@ -64,7 +63,7 @@ router.post('/login', async (req: Request, res: Response) => {
 
 
     } catch (error) {
-        res.json({"msg": "Something went wrong!"})
+        res.status(500).json({"msg": "Something went wrong!"})
     }
 })
 
@@ -83,7 +82,7 @@ router.get('/me', verify, async (req: any, res: Response) => {
             email
         })
     } catch (error) {
-        res.json({"msg": "Something went wrong!"})
+        res.status(500).json({"msg": "Something went wrong!"})
     }
 })
 
