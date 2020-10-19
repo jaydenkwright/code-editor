@@ -13,10 +13,10 @@ router.get('/:id', async (req: Request, res: Response) => {
         if (code.rows[0]){
             res.json(code.rows[0])
         }else{
-            res.json({})
+            res.status(404).json({"msg": "Snippet could not be found!"})
         }
     } catch (error) {
-        res.json({'msg': 'Something went wrong!'})
+        res.status(500).json({"msg": "Something went wrong!"})
     }
 })
 
@@ -30,10 +30,10 @@ router.get('/project/:projectId', async (req: Request, res: Response) => {
         if (projectCode.rows){
             res.json(projectCode.rows)
         }else{
-            res.json({})
+            res.status(404).json({"msg": "Project could not be found!"})
         }
     } catch (error) {
-        res.json({'msg': 'Something went wrong!'})
+        res.status(500).json({"msg": "Something went wrong!"})
     }
 })
 
@@ -47,7 +47,7 @@ router.post('/create', verify, async (req: any, res: Response) => {
         )
         res.json(newCode.rows[0])
     }catch(error){
-        res.json({"msg": "Something went wrong!"})
+        res.status(500).json({"msg": "Something went wrong!"})
     }
 })
 
@@ -62,7 +62,7 @@ router.put('/update/:id', verify, async (req: any, res: Response) => {
         )
         res.json({"msg": "Updated"})
     } catch (error) {
-        res.json({"msg": "Something went wrong!"})
+        res.status(500).json({"msg": "Something went wrong!"})
     }
 })
 
@@ -76,7 +76,7 @@ router.delete('/delete/:id', verify, async (req: any, res: Response) => {
         )
         res.json({"msg": "Deleted"})
     } catch (error) {
-        res.json({"msg": "Something went wrong!"})
+        res.status(500).json({"msg": "Something went wrong!"})
     }
 })
 
