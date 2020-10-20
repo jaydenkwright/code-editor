@@ -1,38 +1,40 @@
 body{
-  margin: 0
+  margin: 0;
 }
 
 .window-container{
   display: flex;
-}
-.code-window{
-  background-color: hsl(225, 6%, 25%);
-  width: 30%;
 }
 
 .window{
   height: 100vh;
 }
 
+.code-window{
+  background-color: hsl(225, 6%, 25%);
+  width: 40%;
+  padding: 0em .5em;
+  height: 100vh;
+}
+
 .display{
   width: 100%;
+  overflow: hidden;
 }
 
 .editor-container{
   flex-grow: 1;
   flex-basis: 0;
   display: flex;
-  padding: .5em;
   background-color: hsl(225, 6%, 25%);
-  height: 28vh;
+  flex-shrink: 0;
 }
 
 .CodeMirror{
-  height: 100% !important;
+  height: 75vh !important;
 }
 
 .editor-wrapper{
   flex: 1;
-  flex-grow: 1;
   overflow: hidden;
 }
