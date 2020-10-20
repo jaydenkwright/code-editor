@@ -6,11 +6,11 @@ import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/css/css'
 import { Controlled as ControlledEditor } from 'react-codemirror2'
 
-const Editor: React.FC<any> = ({ displayName, language, value, onChange }) => {
+const Editor: React.FC<any> = ({ language, value, onChange }) => {
     const handleChange = (editor: any, data: any, value: any) => {
         onChange(value)
     }
-    
+
     return (
         <>
             <div className='editor-container'>
