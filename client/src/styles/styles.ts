@@ -16,7 +16,7 @@ export const Button = styled.button<ButtonProps>`
     &:hover {
         background-color: ${({ active }) => active ? '#333' : '#888'};
     }
-`
+`  
 
 export const H1 = styled.h1`
     color: #999;
