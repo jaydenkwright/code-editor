@@ -1,39 +1,34 @@
 import React, { useState, useEffect} from 'react'
 import Editor from './Editor'
 import useLocalStorage from '../hooks/useLocalStorage'
-import { stringify } from 'querystring'
+import { languages } from '../interfaces/EditorInterface'
+import { Button, H1, H3 } from '../styles/styles'
 
 const EditorPage = () => {
 const [html, setHTML] = useLocalStorage('html', `<h1>Hello World</h1>`)
-const [css, setCSS] = useState<string>(``)
-const [javascript, setJavascript] = useState<string>('')
+const [css, setCSS] = useLocalStorage('css', '')
+const [javascript, setJavascript] = useLocalStorage('javascript', '')
 const [srcDoc, setSrcDoc] = useState<string>('')
 const [current, setCurrent] = useState('html')
 
 useEffect(() => {
-    const timeout = setTimeout(() => {
-    setSrcDoc(`
-    <html>
-        <body>${html}</body>
-        <style>${css}</style>
-        <script>${javascript}</script>
-    </html>
-    `)
-    }, 1000)
+    const codeTimeOut = () => {
+        const timeout = setTimeout(() => {
+            setSrcDoc(`
+            <html>
+                <body>${html}</body>
+                <style>${css}</style>
+                <script>${javascript}</script>
+            </html>
+            `)
+         }, 1000)
+        
+        return () => clearTimeout(timeout)
+    }
 
-    return () => clearTimeout(timeout)
+    codeTimeOut()
+
 }, [html, css, javascript])
-
-    interface language {
-        language: String,
-        displayName: String,
-        value: String,
-        onChange: any
-    }
-
-    type languages =  {
-        [key: string]: language
-    }
 
     const langs: languages = {
         html: {
@@ -56,34 +51,31 @@ useEffect(() => {
         }
     }
 
+    const loggedIn = true
 return (
     <>
         <div className='window-container'>
             <div className='window code-window'>
-                <button onClick={() => setCurrent('html')}>HTML</button>
-                <button onClick={() => setCurrent('css')}>CSS</button>
-                <button onClick={() => setCurrent('javascript')}>Javascript</button>
-                {/* <h3>Kyle</h3>
-                <h3>Portfolio Website</h3>
-                <h4>Designs for Portfolio website.</h4> */}
+                {
+                loggedIn ? <>
+                    <H3>Home</H3>
+                    <H1>Untitled</H1>
+                    </>
+                : <>
+                    <Button block={true}>Login</Button>
+                    <Button block={true}>Register</Button>
+                </>
+                }
+
+                <Button active={current === 'html' ? true : false} onClick={() => setCurrent('html')}>HTML</Button>
+                <Button active={current === 'css' ? true : false} onClick={() => setCurrent('css')}>CSS</Button>
+                <Button active={current === 'javascript' ? true : false} onClick={() => setCurrent('javascript')}>Javascript</Button>
                 <Editor 
-                language={langs[current].language}
-                displayName={langs[current].displayName}
-                value={langs[current].value}
-                onChange={langs[current].onChange}
+                    language={langs[current].language}
+                    displayName={langs[current].displayName}
+                    value={langs[current].value}
+                    onChange={langs[current].onChange}
                 />
-                {/* <Editor
-                language='css' 
-                displayName='CSS' 
-                value={css} 
-                onChange={setCSS} 
-                />
-                <Editor
-                language='javascript' 
-                displayName='Javascript' 
-                value={javascript} 
-                onChange={setJavascript} 
-                /> */}
             </div>
             <div className='window display'>
                 <iframe 
