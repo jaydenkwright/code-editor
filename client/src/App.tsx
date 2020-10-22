@@ -9,6 +9,9 @@ import api from './api/api'
 import EditorPage from './components/EditorPage'
 import GettingStarted from './components/GettingStarted'
 import LoginPage from './components/LoginPage'
+import Home from './components/Home'
+import CreateProject from './components/CreateProject'
+import { UserProvider } from './context/UserContext'
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean | null>(null)
@@ -29,19 +32,36 @@ function App() {
   }, [loggedIn])
 
   return (
-    <Router>
-      <Switch>
-        <Route path='/' exact>
-          <EditorPage />
-        </Route>
-        <Route path='/getStarted' exact>
-          <GettingStarted />
-        </Route>
-        <Route path='/login' exact>
-          <LoginPage />
-        </Route>
-      </Switch>
-    </Router>
+    <UserProvider value={{ loggedIn, setLoggedIn }}>
+      {loggedIn ? 
+        <Router>
+          <Switch>
+            <Route path='/' exact>
+              <Home />
+            </Route>
+            <Route path='/project/create' exact>
+              <CreateProject />
+            </Route>
+            <Route path='/project/:id' exact>
+              <EditorPage />
+            </Route>
+          </Switch>
+      </Router>
+     :
+      <Router>
+          <Switch>
+            <Route path='/' exact>
+              <EditorPage />
+            </Route>
+            <Route path='/getStarted' exact>
+              <GettingStarted />
+            </Route>
+            <Route path='/login' exact>
+              <LoginPage />
+            </Route>
+          </Switch>
+      </Router> }
+    </UserProvider>
   );
 }
 
