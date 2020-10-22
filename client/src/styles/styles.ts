@@ -1,9 +1,11 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 interface ButtonProps {
     active?: boolean,
     block?: boolean,
-    primary?: boolean
+    primary?: boolean,
+    noWidth?: boolean
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -26,7 +28,7 @@ export const SubmitButton = styled.button<ButtonProps>`
     outline: none;
     font-size: 1em;
     padding: 0em .5em;
-    width: 20vw;
+    width: ${({ noWidth }) => noWidth ? ' ' : '20vw'};
     height: 5vh;
     margin: 0em 0em .5em 0em;
     display: ${(({ block }) => block ? 'block' : 'inline-block')};
@@ -37,15 +39,23 @@ export const SubmitButton = styled.button<ButtonProps>`
 
 
 export const H1 = styled.h1`
-    color: #999;
+    color: #E2E8F0;
     font-family: Arial, Helvetica, sans-serif;
 `
 
 export const H3 = styled.h3`
-    color: #888;
+    color: #A0AEC0;
     font-family: Arial, Helvetica, sans-serif;
+`
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+    &:visited {
+        color: #E2E8F0;
+    }
+
     &:hover {
-        color: #999;
+        color: #EDF2F7;
     }
 `
 
@@ -59,6 +69,37 @@ export const TextBox = styled.input`
     display: block;
     outline: none;
     padding: 0em .2em;
+`
+
+export const TextArea = styled.textarea`
+    background-color: #CBD5E0;
+    color: #2D3748;
+    margin: auto auto 1em auto;
+    width: 20vw;
+    height: 10vh;
+    border: none;
+    display: block;
+    outline: none;
+    padding: .5em .2em;
+    font-family: Arial, Helvetica, sans-serif;
+`
+
+export const Select = styled.select`
+    width: 20vw;
+    height: 5vh;
+    color: #2D3748;
+    background-color: #CBD5E0;
+    margin: auto auto 1em auto;
+    border:none;
+    display: block;
+    outline: none;
+    padding: .5em .2em;
+`;
+
+export const Option = styled.option`
+    width: 20vw;
+    color: #2D3748;
+    background-color: #CBD5E0;
 `
 
 export const ErrorBox = styled.div`
