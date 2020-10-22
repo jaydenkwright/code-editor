@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { TextBox, SubmitButton, ErrorBox } from '../styles/styles'
 import { useHistory } from 'react-router-dom'
 import api from '../api/api'
+import UserContext from '../context/UserContext'
 
 const Login = () => {
+    const user = useContext<any>(UserContext)
+    const { setLoggedIn } = user
     const history = useHistory()
     const [loginEmail, setLoginEmail] = useState<string>('')
     const [loginPassword, setLoginPassword] = useState<string>('')
     const [loginError, setLoginError] = useState<string>('')
-    const [loginConfirmation, setLoginConfrimation] = useState(null)
 
     const submitLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -21,7 +23,10 @@ const Login = () => {
                     }, {
                         withCredentials: true
                     })
-                    setLoginConfrimation(response.data)
+                    if (response.data){
+                        setLoggedIn(true)
+                        history.push('/')
+                    }
                 }catch(error){
                     setLoginError(error.response.data.msg)
                 }
@@ -30,9 +35,6 @@ const Login = () => {
         }
     }
 
-    if (loginConfirmation){
-        history.push('/')
-    }
     return (
         <div className='loginContainer'>
             { loginError ? <ErrorBox>{loginError}</ErrorBox> : null}
