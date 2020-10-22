@@ -4,9 +4,9 @@ body{
 
 .container{
   background-color: hsl(225, 6%, 25%);
-  height: 100vh;
   text-align: center;
-  padding: 10em 0em;
+  padding: 5em 0em 0em 1em;
+  min-height: 100vh;
 }
 
 .loginRegistrationContainer{
@@ -21,6 +21,19 @@ body{
 
 .registrationContainer{
   flex: 1
+}
+
+.homeContainer{
+  display: inline-block;
+  text-align: left;
+}
+
+.projectContainer{
+  padding: 1em 0em 2em;
+}
+
+.createProjectContainer{
+  text-align: center;
 }
 
 .window-container{
