@@ -2,6 +2,27 @@ body{
   margin: 0;
 }
 
+.container{
+  background-color: hsl(225, 6%, 25%);
+  height: 100vh;
+  text-align: center;
+  padding: 10em 0em;
+}
+
+.loginRegistrationContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginContainer{
+  flex: 1;
+}
+
+.registrationContainer{
+  flex: 1
+}
+
 .window-container{
   display: flex;
 }
