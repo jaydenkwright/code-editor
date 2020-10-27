@@ -23,7 +23,30 @@ const Home = () => {
                         withCredentials: true
                     })
                     if (response.data){
-                        history.push(`/project/${response.data.id}`)
+                        const HTMLresponse = await api.post('/code/create', {
+                            projectId: response.data.id,
+                            lang: 'html',
+                            code: ''
+                        },{
+                            withCredentials: true
+                        })
+                        const CSSreponse = await api.post('/code/create', {
+                            projectId: response.data.id,
+                            lang: 'css',
+                            code: ''
+                        },{
+                            withCredentials: true
+                        })
+                        const JAVASCRIPTresponse = await api.post('/code/create', {
+                            projectId: response.data.id,
+                            lang: 'javascript',
+                            code: ''
+                        },{
+                            withCredentials: true
+                        })
+                        if (HTMLresponse && CSSreponse && JAVASCRIPTresponse){
+                            history.push(`/project/${response.data.id}`)
+                        }
                     }
                 } catch (error) {
                     setError(error.response.data.msg)
