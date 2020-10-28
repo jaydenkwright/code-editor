@@ -15,6 +15,10 @@ app.use(cors({
     credentials: true
 }));
 
+app.get('*', (req, res) => {
+    res.sendFile('../client/build/index.html')
+});
+
 app.use('/api/code', code)
 app.use('/api/project/', projects)
 app.use('/api/user/', user)
