@@ -17,12 +17,12 @@ router.post('/create', verify, async (req: any, res: Response) => {
     }
 })
 
-router.get('/user/:userId', async (req: Request, res: Response) => {
-    const { userId } = req.params
+router.get('/user/', verify, async (req: any, res: Response) => {
+    const { id } = req.user
     try {
         const userProjects = await pool.query(
             "SELECT * FROM projects WHERE userId = $1 ORDER BY id DESC",
-            [userId]
+            [id]
         )
         if (userProjects.rows){
             res.json(userProjects.rows)

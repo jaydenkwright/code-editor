@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React from 'react'
 import Login from './Login'
-import api from '../api/api'
 import Register from './Register'
 
 const GettingStarted = () => {

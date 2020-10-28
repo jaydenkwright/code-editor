@@ -32,7 +32,7 @@ const Home = () => {
                 <div className='projectContainer'>
                     {
                         projects ? projects.map((project: any) => ( 
-                            <div>
+                            <div key={project.id}>
                                 <H1><StyledLink to={`/project/${project.id}`} >{project.title}</StyledLink></H1>
                                 <H3>{project.description}</H3>
                             </div>
