@@ -13,7 +13,7 @@ const EditorPage = () => {
     const { id } = useParams<any>()
     const user = useContext<any>(UserContext)
     const { loggedIn } = user
-    const [html, setHTML] = useLocalStorage('html', `test`)
+    const [html, setHTML] = useLocalStorage('html', `<h1>Hello World</h1>`)
     const [css, setCSS] = useLocalStorage('css', '')
     const [javascript, setJavascript] = useLocalStorage('javascript', '')
     const [lastUpdateHtml, setLastUpdateHtml] = useState<string>('')
