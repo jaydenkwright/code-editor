@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import user from './routes/user'
 import cookieParser from 'cookie-parser'
+import * as path from 'path';
 dotenv.config()
 
 const app: express.Application = express()
@@ -15,13 +16,12 @@ app.use(cors({
     credentials: true
 }));
 
-app.get('*', (req, res) => {
-    res.sendFile('../client/build/index.html')
-});
-
 app.use('/api/code', code)
 app.use('/api/project/', projects)
 app.use('/api/user/', user)
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/build/index.html'));
+});
 
 const port = process.env.PORT || 5000
 

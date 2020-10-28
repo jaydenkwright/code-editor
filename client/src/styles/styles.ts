@@ -49,6 +49,7 @@ export const H3 = styled.h3`
 `
 
 export const StyledLink = styled(Link)`
+    color: #E2E8F0;
     text-decoration: none;
     &:visited {
         color: #E2E8F0;

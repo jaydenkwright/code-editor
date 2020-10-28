@@ -14,7 +14,12 @@ const Home = () => {
                 })
                 setProjects(response.data)
             } catch (error) {
-                setError(error.response.data.msg)
+                console.log(error)
+                if (error.response){
+                    setError(error.response.data.msg)
+                }else{
+                    setError("Something went wrong!")
+                }
             }
         }
 
@@ -31,7 +36,7 @@ const Home = () => {
                 { error ? <ErrorBox>{ error}</ErrorBox> : null}
                 <div className='projectContainer'>
                     {
-                        projects ? projects.map((project: any) => ( 
+                        projects && projects.length > 0 ? projects.map((project: any) => ( 
                             <div key={project.id}>
                                 <H1><StyledLink to={`/project/${project.id}`} >{project.title}</StyledLink></H1>
                                 <H3>{project.description}</H3>
