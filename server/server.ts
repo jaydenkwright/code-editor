@@ -9,13 +9,14 @@ import * as path from 'path';
 dotenv.config()
 
 const app: express.Application = express()
-const env = process.env.ENVIROMENT
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
     origin: '*',
     credentials: true
 }));
+
+console.log(process.env.GITHUB_USERNAME)
 
 app.use('/api/code', code)
 app.use('/api/project/', projects)
