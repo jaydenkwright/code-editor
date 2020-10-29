@@ -13,7 +13,7 @@ const env = process.env.ENVIROMENT
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: env === 'production' ? '*' : 'http://localhost:3000',
+    origin: '*',
     credentials: true
 }));
 
