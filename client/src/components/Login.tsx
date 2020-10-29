@@ -28,7 +28,11 @@ const Login = () => {
                         history.push('/')
                     }
                 }catch(error){
-                    setLoginError(error.response.data.msg)
+                    if (error.response.data){
+                        setLoginError(error.response.data.msg)
+                    }else{
+                        setLoginError("Something went wrong!")
+                    }
                 }
             }
             login()

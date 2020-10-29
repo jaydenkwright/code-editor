@@ -50,7 +50,11 @@ const Home = () => {
                         }
                     }
                 } catch (error) {
-                    setError(error.response.data.msg)
+                    if (error.response.data){
+                        setError(error.response.data.msg)
+                    }else{
+                        setError("Something went wrong!")
+                    }
                 }
             }
             createProject()

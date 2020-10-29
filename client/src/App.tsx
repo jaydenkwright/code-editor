@@ -22,7 +22,9 @@ function App() {
         {
           withCredentials: true
         })
-        setLoggedIn(true)
+        if (response.data){
+          setLoggedIn(true)
+        }
       } catch (error) {
         setLoggedIn(false)
       }
@@ -30,6 +32,7 @@ function App() {
 
     isLoggedIn()
   }, [loggedIn])
+
 
   return (
     <UserProvider value={{ loggedIn, setLoggedIn }}>

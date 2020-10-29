@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { H1, H3, SubmitButton, ErrorBox, StyledLink } from '../styles/styles'
 import api from '../api/api'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Helmet from 'react-helmet'
 
 const Home = () => {

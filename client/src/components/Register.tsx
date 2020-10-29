@@ -27,7 +27,11 @@ const Register = () => {
                     })
                     setRegisterConfirmation(response.data)
                 }catch(error){
-                    setRegistrationError(error.response.data.msg)
+                    if (error.response.data){
+                        setRegistrationError(error.response.data.msg)
+                    }else{
+                        setRegistrationError("Something went wrong!")
+                    }
                 }
             }
             register()

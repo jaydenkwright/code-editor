@@ -70,6 +70,9 @@ export const TextBox = styled.input`
     display: block;
     outline: none;
     padding: 0em .2em;
+    @media screen and (max-width: 828px){
+        width: 60vw;
+    }
 `
 
 export const TextArea = styled.textarea`

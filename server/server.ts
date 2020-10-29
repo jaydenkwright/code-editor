@@ -12,11 +12,9 @@ const app: express.Application = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: '*',
+    origin: 'http://localhost:3000',
     credentials: true
 }));
-
-console.log(process.env.GITHUB_USERNAME)
 
 app.use('/api/code', code)
 app.use('/api/project/', projects)

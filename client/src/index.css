@@ -13,6 +13,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: fadeIn 1.5s ease;
 }
 
 .loginContainer{
@@ -26,6 +27,7 @@ body{
 .homeContainer{
   display: inline-block;
   text-align: left;
+  animation: fadeIn 1.5s ease;
 }
 
 .projectContainer{
@@ -34,6 +36,7 @@ body{
 
 .createProjectContainer{
   text-align: center;
+  animation: fadeIn 1.5s ease;
 }
 
 .window-container{
@@ -42,6 +45,7 @@ body{
 
 .window{
   height: 100vh;
+  animation: fadeIn .5s ease;
 }
 
 .code-window{
@@ -71,4 +75,39 @@ body{
 .editor-wrapper{
   flex: 1;
   overflow: hidden;
+}
+
+@media screen and (max-width: 828px){
+  .window-container{
+    flex-direction: column;
+  }
+  .window{
+    height: 100vh;
+  }
+  
+  .code-window{
+    width: 100%;
+
+  }
+
+  .loginRegistrationContainer{
+    flex-direction: column;
+  }
+
+  .loginContainer{
+    width: 100%;
+    margin: 5em;
+  }
+  
+  .registrationContainer{
+    flex: 1
+  }
+}
+
+@keyframes fadeIn {
+  0%{
+      opacity: 0;
+  }100%{
+      opacity: 1;
+  }
 }
