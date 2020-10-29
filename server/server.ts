@@ -17,17 +17,14 @@ app.use(cors({
     credentials: true
 }));
 
-
 app.use('/api/code', code)
 app.use('/api/project/', projects)
 app.use('/api/user/', user)
 const root = path.join(__dirname+'/build/')
 app.use(express.static(root));
-if (env === 'production'){
-    app.get('/*', (req, res) => {
-        res.sendFile('index.html', { root });
-    });
-}
+app.get('/*', (req, res) => {
+    res.sendFile('index.html', { root });
+});
 
 const port = process.env.PORT || 5000
 
