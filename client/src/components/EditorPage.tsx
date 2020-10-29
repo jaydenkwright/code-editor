@@ -6,6 +6,7 @@ import { languages } from '../interfaces/EditorInterface'
 import { Button, H1, H3, SubmitButton } from '../styles/styles'
 import UserContext from '../context/UserContext'
 import api from '../api/api'
+import Helmet from 'react-helmet'
 import { useHistory, useParams } from 'react-router-dom'
 
 const EditorPage = () => {
@@ -129,6 +130,15 @@ const EditorPage = () => {
 
     return (
         <>
+            <Helmet>
+                {
+                    id ?
+                        project ?
+                        <title>{ project.title }</title>
+                        : <title>...</title>
+                    : <title>Code Editor</title>
+                }
+            </Helmet>
             <div className='window-container'>
                 <div className='window code-window'>
                     {
