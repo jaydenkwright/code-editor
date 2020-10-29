@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { TextArea, TextBox, SubmitButton, Select, Option, ErrorBox } from '../styles/styles'
 import { useHistory } from 'react-router-dom'
 import api from '../api/api'
+import Helmet from 'react-helmet'
 
 const Home = () => {
     const [title, setTitle] = useState<string>('')
@@ -58,6 +59,9 @@ const Home = () => {
 
     return (
     <div className='container'>
+        <Helmet>
+            <title>Create a project</title>
+        </Helmet>
             { error ? <ErrorBox>{error}</ErrorBox> : null}
             <form onSubmit={submit}>
                 <TextBox type='text' placeholder='Title' maxLength={100} onChange={(e) => setTitle(e.target.value)} />
