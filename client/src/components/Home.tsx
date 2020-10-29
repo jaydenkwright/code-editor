@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { H1, H3, SubmitButton, ErrorBox, StyledLink } from '../styles/styles'
 import api from '../api/api'
 import { useHistory, Link } from 'react-router-dom'
+import Helmet from 'react-helmet'
 
 const Home = () => {
     const [projects, setProjects] = useState()
@@ -29,6 +30,9 @@ const Home = () => {
     const history = useHistory()
     return (
         <div className='container'>
+            <Helmet>
+                <title>Code Editor</title>
+            </Helmet>
             <div className='homeContainer'>
                 <div className='title'>
                     <H1>Hello, Kyle</H1>
