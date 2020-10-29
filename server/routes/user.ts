@@ -33,6 +33,7 @@ router.post('/register', async (req: Request, res: Response) => {
 
         res.json({"msg": "User created"})
     }catch(error){
+        console.log(error)
         res.status(500).json({"msg": "Something went wrong!"})
     }
 })
