@@ -9,10 +9,11 @@ import * as path from 'path';
 dotenv.config()
 
 const app: express.Application = express()
+const env = process.env.ENVIROMENT
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: '*',
+    origin: env === 'production' ? '*' : 'http://localhost:3000',
     credentials: true
 }));
 
@@ -22,9 +23,11 @@ app.use('/api/project/', projects)
 app.use('/api/user/', user)
 const root = path.join(__dirname+'/build/')
 app.use(express.static(root));
-app.get('/*', (req, res) => {
-    res.sendFile('index.html', { root });
-});
+if (env === 'production'){
+    app.get('/*', (req, res) => {
+        res.sendFile('index.html', { root });
+    });
+}
 
 const port = process.env.PORT || 5000
 
