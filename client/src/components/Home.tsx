@@ -35,7 +35,7 @@ const Home = () => {
             </Helmet>
             <div className='homeContainer'>
                 <div className='title'>
-                    <H1>Hello, Kyle</H1>
+                    <H1>Projects</H1>
                 </div>
                 { error ? <ErrorBox>{ error}</ErrorBox> : null}
                 <div className='projectContainer'>
