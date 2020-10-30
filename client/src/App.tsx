@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 import api from './api/api'
 import EditorPage from './components/EditorPage'
@@ -48,6 +49,9 @@ function App() {
             <Route path='/project/:id' exact>
               <EditorPage />
             </Route>
+            <Route path='*'>
+              <Redirect to="/" />
+            </Route>
           </Switch>
       </Router>
      :
@@ -61,6 +65,9 @@ function App() {
             </Route>
             <Route path='/login' exact>
               <LoginPage />
+            </Route>
+            <Route path='*'>
+              <Redirect to="/" />
             </Route>
           </Switch>
       </Router> }
