@@ -86,6 +86,9 @@ export const TextArea = styled.textarea`
     outline: none;
     padding: .5em .2em;
     font-family: Arial, Helvetica, sans-serif;
+    @media screen and (max-width: 828px){
+        width: 60vw;
+    }
 `
 
 export const Select = styled.select`
