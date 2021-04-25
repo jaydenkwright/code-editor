@@ -5,7 +5,7 @@ interface ButtonProps {
     active?: boolean,
     block?: boolean,
     primary?: boolean,
-    noWidth?: boolean
+    noWidth?: boolean,
 }
 
 export const Button = styled.button<ButtonProps>`
