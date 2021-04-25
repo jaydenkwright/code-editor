@@ -45,7 +45,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone gh repo clone jaydenkwright/code-editor
+   git clone https://github.com/jaydenkwright/code-editor.git
    ```
 2. Install NPM packages
    ```sh
